@@ -284,7 +284,19 @@ h2 {font-size:26px;}
 h3 {font-size:22px;}
 ```
 
-### 2. 较长的属性值推荐放在多行，属性值开头保持一级缩进。
+### 2. 包含多个前缀的声明以第一个声明中的冒号对齐，较长的前缀写在最前面。
+
+```css
+.selector {
+    -webkit-transition: .3s ease;
+       -moz-transition: .3s ease;
+        -ms-transition: .3s ease;
+         -o-transition: .3s ease;
+            transition: .3s ease;
+}
+```
+
+### 3. 较长的属性值推荐放在多行，属性值开头保持一级缩进。
 
 比如多个` box-shadow` 和背景渐变等，这有助于提高代码的可读性，且易于生成有效的 Diff。
 
@@ -322,15 +334,17 @@ h3 {font-size:22px;}
 }
 ```
 
-### 3. 包含多个前缀的声明以第一个声明中的冒号对齐，较长的前缀写在最前面。
+### 4. `@keyframes` 内的关键帧保留一级缩进。
 
 ```css
-.selector {
-    -webkit-transition: .3s ease;
-       -moz-transition: .3s ease;
-        -ms-transition: .3s ease;
-         -o-transition: .3s ease;
-            transition: .3s ease;
+@keyframes foo {
+    50% {
+       -webkit-transform: scale(1.2);
+          -moz-transform: scale(1.2);
+           -ms-transform: scale(1.2);
+            -o-transform: scale(1.2);
+               transform: scale(1.2);
+    }
 }
 ```
 
