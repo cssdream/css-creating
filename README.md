@@ -453,8 +453,70 @@ CSS选择器匹配规则是从右往左，例如：
 * 尽量避免使用 IE 中的 CSS filters。
 * 统一使用双引号「""」,如`content: ""`。
 * 选择器中的属性值也加上双引号，如`input[type="checkbox"]`。
-* `font-weight`普通字重使用`normal`，加粗使用`bold`。大部分字体只有两个字重，所以  
+* 'font-weight'普通字重使用'normal'，加粗使用'bold'。大部分字体只有两个字重，所以  
 不建议使用容易混淆的数值表示方法。
+* 如无特别精确的要求，推荐使用不带单位的'line-height'，当前元素的行高只与自身'font-size'成比例关系，使排版更加灵活。例如'line-height:1.5'  
+    '<strong>line-height: 1.5 ≠ line-height: 150%</strong>'  
+例如：
+
+```html
+<div class="box">
+    <p>line-height</p>
+</div>
+```
+
+```css
+.box {
+    line-height: 50px;
+    font-size: 20px;
+}
+
+p {
+    font-size: 40px;
+}
+
+/**
+ * p 的行高计算过程为：
+ * 直接继承父元素的行高，最终
+   p { line-height: 50px; }
+ */
+```
+
+```css
+.box {
+    line-height: 150%;
+    font-size: 20px;
+}
+
+p {
+    font-size: 40px;
+}
+
+/**
+ * p 的行高计算过程为：
+ * 1. 先计算出父元素的行高（150% * 20px = 30px）
+ * 2. 然后 p 继承父元素的行高，最终
+   p { line-height: 30px; }
+ */
+```
+
+```css
+.box {
+    line-height: 1.5;
+    font-size: 20px;
+}
+
+p {
+    font-size: 40px;
+}
+
+/**
+ * p 的行高计算过程为：
+ * 1. 先继承父元素的 1.5（1.5 * 40px = 60px）
+ * 2. 然后乘以 p 的 font-size，最终
+   p { line-height: 60px; }
+ */
+```
 
 <a name="preprocessors"></a>
 ## 9. 预处理工具
