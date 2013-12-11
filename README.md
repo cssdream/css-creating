@@ -453,11 +453,11 @@ CSS选择器匹配规则是从右往左，例如：
 * 尽量避免使用 IE 中的 CSS filters。
 * 统一使用双引号「""」,如`content: ""`。
 * 选择器中的属性值也加上双引号，如`input[type="checkbox"]`。
-* 'font-weight'普通字重使用'normal'，加粗使用'bold'。大部分字体只有两个字重，所以  
+* `font-weight`普通字重使用`normal`，加粗使用`bold`。大部分字体只有两个字重，所以  
 不建议使用容易混淆的数值表示方法。
-* 如无特别精确的要求，推荐使用不带单位的'line-height'，当前元素的行高只与自身'font-size'成比例关系，使排版更加灵活。例如'line-height:1.5'  
-    '<strong>line-height: 1.5 ≠ line-height: 150%</strong>'  
-例如：
+* 如无特别精确的要求，推荐使用不带单位的`line-height`，当前元素的行高只与自身`font-size`成比例关系，使排版更加灵活。例如`line-height:1.5`
+
+    <strong>line-height: 1.5 ≠ line-height: 150%</strong> 
 
 ```html
 <div class="box">
