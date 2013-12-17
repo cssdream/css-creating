@@ -568,6 +568,133 @@ p {
 
 <a name="build"></a>
 ## 11. 构建部署
+### 1.使用CSS Reset（CSS重置）还是normalize.css？
+#### 1.1 什么是CSS Reset
+在HTML标签在浏览器里有默认的样式，例如 p 标签有上下边距，strong标签有字体加粗样式，em标签有字体倾斜样式。
+不同浏览器的默认样式之间也会有差别，例如ul默认带有缩进的样式，在IE下，它的缩进是通过margin实现的，而Firefox下，
+它的缩进是由padding实现的。在切换页面的时候，浏览器的默认样式往往会给我们带来麻烦，影响开发效率。
+所以解决的方法就是一开始就将浏览器的默认样式全部去掉，更准确说就是通过重新定义标签样式。
+“覆盖”浏览器的CSS默认属性。最最简单的说法就是把浏览器提供的默认样式覆盖掉！这就是CSS Reset。
+#### 1.2 为什么使用CSS Reset
+为什么需要CSS Reset？
+因为浏览器很多，每个浏览器的默认样式也是不同的，比如<button>标签，在IE浏览器、Firefox浏览器以及Safari浏览器中的样式都是不同的，
+所以，通过重置button标签的默认CSS属性，然后再对它进行统一定义，就可以在各个浏览器下产生相同的显示效果。
+#### 1.3 CSS Reset的具体代码
+最简单的CSS Reset内容寥寥几行就能完成：
+```css
+* { padding: 0; margin: 0; border: 0; }
+```
+以上代码过于简单粗暴，小朋友请勿模仿！
+YUI也给了一个很好的CSS Reset，YUI的CSS Reset内容：
+```css
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
+form,fieldset,input,textarea,p,blockquote,th,td {
+padding: 0;
+margin: 0;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+fieldset,img {
+border: 0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+font-weight: normal;
+font-style: normal;
+}
+ol,ul {
+list-style: none;
+}
+caption,th {
+text-align: left;
+}
+h1,h2,h3,h4,h5,h6 {
+font-weight: normal;
+font-size: 100%;
+}
+q:before,q:after {
+content:'';
+}
+abbr,acronym { border: 0;
+}
+```
+以及国外名人Eric Meyer的CSS Reset V1.0|200802内容：
+```css
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+margin: 0;
+padding: 0;
+border: 0;
+outline: 0;
+font-size: 100%;
+vertical-align: baseline;
+background: transparent;
+}
+body {
+line-height: 1;
+}
+ol, ul {
+list-style: none;
+}
+blockquote, q {
+quotes: none;
+}
+blockquote:before,blockquote:after,
+q:before, q:after {
+content: '';
+content: none;
+}
+/* remember to define focus styles! */
+:focus {
+outline: 0;}
+/* remember to highlight inserts somehow! */
+ins {
+text-decoration: none;
+}
+del {
+text-decoration: line-through;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+border-collapse: collapse;
+border-spacing: 0;
+} 
+```
+Eric Meyer V2.0|20110126
+```css
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em,
+img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,
+dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption,
+tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup, menu, nav, output,
+ruby, section, summary,time, mark, audio, video {
+margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+display: block;}body {line-height: 1;
+}
+ol, ul {list-style: none;
+}blockquote, q {quotes: none;}
+blockquote:before, blockquote:after,
+q:before, q:after {content: '';content: none;}table {border-collapse: collapse;border-spacing: 0;}
+```
+###2. normalize.css
+####2.1 normalize.css什么？
+normalize.css是一个可定制的CSS文件，使所有浏览器呈现HTML元素更一致和符合现代标准。
+详见https://github.com/necolas/normalize.css
+
+###3. 结论
+为了显得高端大气，请毫不犹豫的使用normalize.css!
+
 
 使用 grunt 部署 CSS
 
