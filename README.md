@@ -439,7 +439,7 @@ h3 {font-size: 22px;}
 
 ### 1. 可以使用 `*` 通用选择器。
 
-* 通用选择器效率低是一个误区，如有必要可以使用。测试文章[关于css通配符性能问题不完全测试](http://i.wanz.im/2012/01/03/performance_testing_about_css_universal_selector/)
+`*` 通用选择器效率低是一个误区，如有必要可以使用。测试文章[关于css通配符性能问题不完全测试](http://i.wanz.im/2012/01/03/performance_testing_about_css_universal_selector/)
 
 例如：
 
