@@ -78,11 +78,11 @@ CSS 文件中有如下几种注释：
 ```
 ### 3. Doxygen 风格的注释
 
-每个 CSS 文件的头部或区块的开始处应当包含 [Doxygen](http://zh.wikipedia.org/wiki/Doxygen/) 风格的注释，以阐明该文件或这段代码的
+每个 CSS 文件的头部或区块的开始处应当包含 [Doxygen](http://zh.wikipedia.org/wiki/Doxygen) 风格的注释，以阐明该文件或这段代码的
 作用、作者、最后更新时间等信息。
 
 
-[Doxygen](http://zh.wikipedia.org/wiki/Doxygen/) 风格的注释以 /** 开始，每行以 * 号开头。
+[Doxygen](http://zh.wikipedia.org/wiki/Doxygen) 风格的注释以 /** 开始，每行以 * 号开头。
 
 ```
 /**
@@ -98,7 +98,7 @@ CSS 文件中有如下几种注释：
  */
 ```
 
- [Doxygen](http://zh.wikipedia.org/wiki/Doxygen/) 风格的注释内如果包含其他代码，不写开头的 * 号，以方便复制代码。
+ [Doxygen](http://zh.wikipedia.org/wiki/Doxygen) 风格的注释内如果包含其他代码，不写开头的 * 号，以方便复制代码。
 
 ```
  /**
