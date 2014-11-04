@@ -73,7 +73,7 @@ Sublime Text 虽然在新建工程的时候会生成 ```xxx.sumlime-project``` �
 
 ### 2. 快速开始
 
- 1. 在项目根目录新建一个 ```.editorconfig``` 文件，保存为 utf-8 格式。Windows 用户由于无法直接新建一个没有文件名的文件，可以新建一个 ```.editorconfig.``` 文件即可，也可以在命令行（CMD）中使用 ```echo.>.editorconfig``` 来创建。
+ 1. 在项目根目录新建一个 ```.editorconfig``` 文件，保存为 utf-8 格式。Windows 用户由于无法直接新建一个没有文件名的文件，可以新建一个 ```.editorconfig.``` 文件即可，也可以在命令行（CMD）中使用 ```echo.>.editorconfig``` 来创建。    
    ![Windows 中创建 .editorconfig 文件示例](http://gtms03.alicdn.com/tps/i3/TB1shUbGFXXXXbfXpXXXdvPSXXX-380-287.gif)
 
  2. 编辑 ```.editorconfig``` 文件
@@ -235,10 +235,15 @@ Sublime Text 虽然在新建工程的时候会生成 ```xxx.sumlime-project``` �
  1. 通配符规则：
     
     ```*``` 匹配任意字符串，但不包括 ```/```
+
     ```**``` 匹配任何字符串
+
     ```?``` 匹配任何单字符
+
     ```[name]``` 匹配任何括号中的单字符
+
     ```[!name]``` 匹配任何非括号中的单字符
+    
     ```{s1,s2,s3}``` 匹配任何给出的多个字符串
 
     说明：
