@@ -48,7 +48,7 @@ Sublime Text 虽然在新建工程的时候会生成 ```xxx.sumlime-project``` �
 
 [cube.css](https://github.com/thx/cube/blob/gh-pages/cube.sublime-project) 中的示例：
 
-```json
+```js
 {
   "folders": [{
     "path": ".",
@@ -74,7 +74,7 @@ Sublime Text 虽然在新建工程的时候会生成 ```xxx.sumlime-project``` �
  2. 编辑 ```.editorconfig``` 文件
 
  ```ini
- # editorconfig.org
+ # css-creating coding style
  root = true
  
  # 为所有文件设置风格

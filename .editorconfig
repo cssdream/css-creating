@@ -1,8 +1,6 @@
  # editorconfig.org
- # root 应该始终在最顶部
  root = true
  
- # 为所有文件设置风格
  [*]
  charset = utf-8
  indent_style = space
@@ -11,6 +9,5 @@
  trim_trailing_whitespace = true
  insert_final_newline = true
  
- # 为 Markdown 文件保留行尾空格
  [*.md]
  trim_trailing_whitespace = false
