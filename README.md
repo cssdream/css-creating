@@ -57,7 +57,7 @@ Sublime Text 在新建工程的时候会生成 ```xxx.sumlime-project``` 文件�
   "settings": {
     "tab_size": 4,
     "translate_tabs_to_spaces": true, // tab 转换为空格
-    "trim_trailing_white_space_on_save": true // 保存是文件末尾增加空行
+    "trim_trailing_white_space_on_save": true // 保存时文件末尾增加空行
   }
 }
 ```
