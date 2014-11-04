@@ -2,38 +2,268 @@
 
 CSS 是一种领域语言（DSL），层叠与继承赋予了 CSS 优雅多姿的无限创造力。正是由于它如此「简单」，
 我们需要一些规范来使其变得更加可依赖。在使用 CSS 的时候不要把它当做一种编程语言，应该把它当做
-画画或者创作。所以本文档不仅仅是一份 CSS 书写规范，更像是 CSS 创作的调色盘。
+绘画或者创作。所以本文档不仅仅是一份 CSS 书写规范，更像是 CSS 创作的调色盘。
 
 > 「作为成功的项目的一员，很重要的一点是意识到只为自己写代码是很糟糕的行为。如果将有成千上万人
 使用你的代码，那么你需要编写最具明确性的代码，而不是以自我的喜好来彰显自己的智商。」  
 —— Idan Gazit
 
+## 前言
+
+  随着 CSS 预处理工具的兴起，
+
 
 ## 目录
 
-1. [缩进](#indentation)
+1. [缩进与换行](#indentation)
 2. [注释](#comments)
 3. [书写格式](#format)
 4. [细节美化](#detail)
 5. [省略](#ellipsis)
-6. [书写顺序](#order)
-7. [选择器](#selector)
-8. [其他](#other)
-9. [预处理工具](#preprocessors)
-10. [代码组织](#organization)
-11. [构建部署](#build)
+6. [缩写](#shorthand)
+7. [书写顺序](#order)
+8. [选择器](#selector)
+9. [字体](#fonts)
+10. [其他](#other)
+11. [预处理工具](#preprocessors)
+12. [后处理工具](#postprocessors)
+13. [代码组织](#organization)
+14. [构建部署](#build)
 
 [许可](#license)
 
 <a name="indentation"></a>
-## 一、缩进
+## 一、缩进与换行
 
-在项目中应该有一个统一的缩进风格，以避免不必要的麻烦，千万不要缩进时空格和制表符（TAB）混用。
+用空格好还是 TAB 好？4个空格还是2个空格好？这都是永远的圣战，累觉不爱，本文档不做详细说明。  
 
-* 推荐缩进使用4个空格。
-* 删除行尾冗余的空格。
+但是无论如何，项目中应该保持统一的缩进风格，以利于代码的阅读，同时可以避免在 git 等版本管理工具中造
+成冗余的 diff 信息，而且千万不要空格和制表符（TAB）混用。
 
-提示：通过编辑器的全局设置保持统一的风格
+本文档规定：
+
+* 使用2个空格缩进。
+* 使用 Unix 风格换行符（LF），[更多](https://github.com/cssmagic/blog/issues/22)。
+* 删除行尾多余的空格。
+* 文件末尾增加一个空行。
+
+### 1. 如何保证统一的缩进风格呢？
+
+Sublime Text 虽然在新建工程的时候会生成 ```xxx.sumlime-project``` 文件，可以配置一些基本缩进，但遗憾的是无法与其他编辑器通用。
+
+[cube.css](https://github.com/thx/cube/blob/gh-pages/cube.sublime-project) 中的示例：
+
+```json
+{
+  "folders": [{
+    "path": ".",
+    "folder_exclude_patterns": ["node_modules", "_site"] // 排除目录
+  }],
+  "settings": {
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true, // tab 转换为空格
+    "trim_trailing_white_space_on_save": true // 保存是文件末尾增加空行
+  }
+}
+```
+
+[EditorConfig](http://editorconfig.org/) 是一个帮助开发者在不同的编辑器中保持统一编码
+风格的插件，支持了大部分流行的编辑器。它包括两部分：代码风格规则定义(```.editorconfig``` 文件)和支持此规则的编辑器插件。
+
+
+### 2. 快速开始
+
+ 1. 在项目根目录新建一个 ```.editorconfig``` 文件，保存为 utf-8 格式。Windows 用户由于无法直接新建一个没有文件名的文件，可以新建一个 ```.editorconfig.``` 文件即可，也可以在命令行（CMD）中使用 ```echo.>.editorconfig``` 来创建。
+   ![Windows 中创建 .editorconfig 文件示例](http://gtms03.alicdn.com/tps/i3/TB1shUbGFXXXXbfXpXXXdvPSXXX-380-287.gif)
+
+ 2. 编辑 ```.editorconfig``` 文件
+
+ ```
+ # editorconfig.org
+ root = true
+ 
+ # 为所有文件设置风格
+ [*]
+ charset = utf-8
+ indent_style = space
+ indent_size = 2
+ end_of_line = lf
+ trim_trailing_whitespace = true
+ insert_final_newline = true
+ 
+ # 为 Markdown 文件保留行尾空格
+ [*.md]
+ trim_trailing_whitespace = false
+ ```
+
+ 4. 安装编辑器插件
+
+<table>
+  <tr>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-jetbrains#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/appCode.png" title="AppCode">
+        <div>AppCode</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/sindresorhus/atom-editorconfig#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/atom.png" title="Atom">
+        <div>Atom</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/kidwm/brackets-editorconfig/">
+        <img width="150" height="150" src="http://editorconfig.org/logos/brackets.png" title="Brackets">
+        <div>Brackets</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-codeblocks#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/codeblocks.png" title="Code::Block">
+        <div>Code::Block</div>
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-emacs#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/emacs.png" title="Emacs">
+        <div>Emacs</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-geany#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/geany.png" title="Geany">
+      <div>Geany</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-gedit#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/gedit.png" title="Gedit">
+        <div>Gedit</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/RReverser/github-editorconfig#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/github.png" title="GitHub (code viewer and editor)">
+        <div>GitHub</div>
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-jetbrains#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/intellijIDEA.png" title="inteltdJ">
+        <div>inteltdJ</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-jedit#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/jedit.png" title="jEdit">
+        <div>jEdit</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-notepad-plus-plus#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/notepad.png" title="Notepad++">
+        <div>Notepad++</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-jetbrains#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/phpStorm.png" title="PHPStorm">
+        <div>PHPStorm</div>
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-jetbrains#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/pyCharm.png" title="PyCharm">
+        <div>PyCharm</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-jetbrains#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/rubyMine.png" title="RubyMine">
+        <div>RubyMine</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/sindresorhus/editorconfig-subtdme#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/sublimetext.png" title="Subtdme Text">
+        <div>Subtdme Text</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/Mr0grog/editorconfig-textmate#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/textmate.png" title="TextMate">
+        <div>TextMate</div>
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-vim#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/vim.png" title="Vim">
+        <div>Vim</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-visualstudio#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/visualstudio.png" title="Visual Studio">
+        <div>Visual Studio</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://github.com/editorconfig/editorconfig-jetbrains#readme">
+        <img width="150" height="150" src="http://editorconfig.org/logos/webStorm.png" title="WebStorm">
+        <div>WebStorm</div>
+      </a>
+    </td>
+  </tr>
+</table>
+
+
+### 3. EditorConfig 文档
+
+ 1. 通配符规则：
+    
+    ```*``` 匹配任意字符串，但不包括 ```/```
+    ```**``` 匹配任何字符串
+    ```?``` 匹配任何单字符
+    ```[name]``` 匹配任何括号中的单字符
+    ```[!name]``` 匹配任何非括号中的单字符
+    ```{s1,s2,s3}``` 匹配任何给出的多个字符串
+
+    说明：
+
+    * ```[]``` 匹配规则是从当前目录算起。
+    * ```?``` 只能匹配且必须有类似 f1.js、f2.js、f12.js 的文件，通过f??.js只能匹配到 f12.js，而f**.js可以匹配到所有。
+    * ```{s1,s2,s3}``` 之间不能有空格。```{f1.js, f2.js, f3.js}``` 无法匹配```f2.js``` 和 ```f3.js```。
+    * ```*``` 和 ```**``` 可以匹配空字符串，例如 ```f*.js``` 可以匹配到 ```f.js```。
+    * 多个匹配之间的规则如果不冲突是可以合并的。
+    * 优先级问题，如果两个匹配所定义的规则冲突，则会以最靠近打开文件的```.editorconfig``文件为准。
+    如果同一个文件中匹配定义冲突，则会以最后定义的为准。**所以在定义规则的时候，须先定义通用规则，后定义特殊规则。**
+ 
+ 2. 属性规则（所有属性不区分大小写）
+
+    
+| 属性                      | 值                                              | 说明  |
+| --------                  | :-----                                          | :----  |
+| root                      | true, false                                     | 设置是否是当前项目的根目录 |
+| indent_style              | tab, space                                      | 设置缩进格式 |
+| indent_size               | number                                          | 设置缩进大小 |
+| tab_width                 | number                                          | 设置 tab 表示的空格数，默认等于indent_size，无需设定 |
+| end_of_line               | lf(Unix \n), cr(Mac OS \r), crlf(Windows \r\n)  | 设置行尾换行符格式 |
+| charset                   | atin1, utf-8, utf-8-bom, utf-16be, utf-16le 等  | 设置字符编码 |
+| trim_trailing_whitespace  | true, false                                     | 设置是否自动删除行尾多余空格 |
+| insert_final_newline      | true, false                                     | 设置是否在保存文件时自动在行尾插入空行 |
 
 <a name="comments"></a>
 ## 二、注释
@@ -106,19 +336,40 @@ CSS 文件中有如下几种注释：
  * 
  * 例如我们可以在注释中嵌入 HTML 代码，同样保持代码的缩进。
  *
-    <div class="mod">
-        <p>这个模块名叫 mod</p>
-    </div>
+  <div class="mod">
+    <p>这个模块名叫 mod</p>
+  </div>
  */
 ```
+
+### 4. CSS 预处理工具中的单行注释
+
+Sass， LESS， Stylus 中可以使用单行注释。
+
+```
+// 注释内容
+
+```
+
+### 5. clean-css 等压缩工具中的注释
+
+clean-css 是一个 CSS 压缩工具，为了保留 CSS 文件的版权信息等特殊需求，支持以下形式的注释
+
+```
+/*!
+  这里是版权信息或者重要的注释，压缩后不会被删除
+*/
+```
+
 <a name="format"></a>
 ## 三、书写格式
 
 ### 1. CSS文件头部声明 `@charset`
 
 为了避免 HTML 和 CSS 文件编码不同时造成中文解析乱码，造成的不必要的麻烦，CSS 文件头部统一加上文件对应的编码，例如文件编码为 `UTF-8` 时：
+
 ```css
-@charset "utf-8";
+@charset "UTF-8";
 /* 开始书写样式 */
 ```
 
@@ -131,14 +382,13 @@ CSS 文件中有如下几种注释：
 
 ### 2. 统一使用小写。
 
-包括颜色中的 16 进制写法，字体名称以及 `translatex`等。
+字体名称以及特殊的 CSS 属性/值（```translateX```等）不要求强制小写。
 
 ```css
 .Foo{
-    font-family: 'Helvetica Neue', Tahoma, 'Hiragino Sans GB', sans-serif;
-    color: #FFF;
-    BACKGROUND: #CCC;
-    -webkit-transform: translateX(20px);
+  BACKGROUND: #CCC;
+  color: currentColor;
+  transform: translateX(20px);
 }
 ```
 
@@ -146,10 +396,9 @@ CSS 文件中有如下几种注释：
 
 ```css
 .foo{
-    font-family: 'helvetica neue', tahoma, 'hiragino sans gb', sans-serif;
-    color: #fff;
-    background: #ccc;
-    -webkit-transform: translatex(20px);
+  background: #ccc;
+  color: currentColor;
+  transform: translateX(20px);
 }
 ```
 
@@ -163,11 +412,11 @@ CSS 文件中有如下几种注释：
 
 ```css
 .selector {
-    width: 200px;
-    font-size: 22px;
-    color: rgba(0, 0, 0, .5);
-    transition: color .3s, width .5s cubic-bezier(.6, 0, .2, 1);
-    transform: matrix(0, 1, 1, 1, 10, 10);
+  width: 200px;
+  font-size: 22px;
+  color: rgba(0, 0, 0, .5);
+  transition: color .3s, width .5s cubic-bezier(.6, 0, .2, 1);
+  transform: matrix(0, 1, 1, 1, 10, 10);
 }
 ```
 
@@ -186,7 +435,7 @@ font-weight: bold;
 
 ```css
 h3 {
-    font-weight: bold;
+  font-weight: bold;
 }
 ```
 
@@ -196,15 +445,15 @@ h3 {
 
 ```css
 h3{
-    font-weight: bold;
-    }
+  font-weight: bold;
+  }
 ```
 
 推荐的写法：
 
 ```css
 h3 {
-    font-weight: bold;
+  font-weight: bold;
 }
 ```
 
@@ -214,7 +463,7 @@ h3 {
 
 ```css
 h1, h2, h3 {
-    font-weight: normal; line-height: 1.5;
+  font-weight: normal; line-height: 1.5;
 }
 ```
 
@@ -224,8 +473,8 @@ h1, h2, h3 {
 h1,
 h2,
 h3 {
-    font-weight: normal;
-    line-height: 1.5;
+  font-weight: normal;
+  line-height: 1.5;
 }
 ```
 
@@ -235,12 +484,12 @@ h3 {
 
 ```css
 .selector1 {
-    display: block;
-    width: 100px
+  display: block;
+  width: 100px
 }
 .selector2 {
-    padding: 10px;
-    margin: 10px auto;
+  padding: 10px;
+  margin: 10px auto;
 }
 ```
 
@@ -248,13 +497,13 @@ h3 {
 
 ```css
 .selector1 {
-    display: block;
-    width: 100px
+  display: block;
+  width: 100px
 }
 
 .selector2 {
-    padding: 10px;
-    margin: 10px auto;
+  padding: 10px;
+  margin: 10px auto;
 }
 ```
 
@@ -263,14 +512,14 @@ h3 {
 
 ### 1. 选择器内只有一个声明时可以写在一行。
 
-这样可以使得代码显得更加紧凑。
+这样可以使得代码显得更加紧凑，注意保持空格。
 
 ```css
-h1 {font-size: 32px;}
+h1 { font-size: 32px; }
 
-h2 {font-size: 26px;}
+h2 { font-size: 26px; }
 
-h3 {font-size: 22px;}
+h3 { font-size: 22px; }
 ```
 
 ### 2. 包含多个前缀的声明不强制对齐。
@@ -279,23 +528,23 @@ h3 {font-size: 22px;}
 
 ```css
 .selector {
-    -webkit-transition: .3s ease;
-    -moz-transition: .3s ease;
-    -ms-transition: .3s ease;
-    -o-transition: .3s ease;
-    transition: .3s ease;
+  -webkit-transition: .3s ease;
+  -moz-transition: .3s ease;
+  -ms-transition: .3s ease;
+  -o-transition: .3s ease;
+  transition: .3s ease;
 }
 ```
 
-在CSS预处理中推荐以冒号对齐，使代码更加美观。
+如果使用 CSS 预处理器或后处理器，推荐以冒号对齐，使代码更加美观。[autoprefixer](https://github.com/postcss/autoprefixer#visual-cascade) 中默认开启这种风格，请保证 ```cascade``` 参数为 true。
 
 ```css
 .selector {
-    -webkit-transition: .3s ease;
-       -moz-transition: .3s ease;
-        -ms-transition: .3s ease;
-         -o-transition: .3s ease;
-            transition: .3s ease;
+  -webkit-transition: .3s ease;
+     -moz-transition: .3s ease;
+      -ms-transition: .3s ease;
+       -o-transition: .3s ease;
+          transition: .3s ease;
 }
 ```
 
@@ -306,35 +555,35 @@ h3 {font-size: 22px;}
 
 ```css
 .selector {
-    box-shadow: 
-        1px 1px 5px #000,
-        0 0 6px blue,
-        2px 0 3px 5px #ccc inset;
-    background-image:
-        linear-gradient(to top right, green, blue),
-        linear-gradient(to right, blue, red);
+  box-shadow: 
+    1px 1px 5px #000,
+    0 0 6px blue,
+    2px 0 3px 5px #ccc inset;
+  background-image:
+    linear-gradient(to top right, green, blue),
+    linear-gradient(to right, blue, red);
 }
 
 @media
-    only screen and (-o-min-device-pixel-ratio: 2/1), /* Opera */
-    only screen and (min--moz-device-pixel-ratio: 2), /* Firefox 16 之前 */
-    only screen and (-webkit-min-device-pixel-ratio: 2), /* WebKit */
-    only screen and (min-resolution: 192dpi), /* 不支持dppx的浏览器 */
-    only screen and (min-resolution: 2dppx) /* 标准 */
+  only screen and (-o-min-device-pixel-ratio: 2/1), /* Opera */
+  only screen and (min--moz-device-pixel-ratio: 2), /* Firefox 16 之前 */
+  only screen and (-webkit-min-device-pixel-ratio: 2), /* WebKit */
+  only screen and (min-resolution: 192dpi), /* 不支持dppx的浏览器 */
+  only screen and (min-resolution: 2dppx) /* 标准 */
 {
-    .selector {
-
-    }
+  .selector {
+  
+  }
 }
 
 @font-face {
-    font-family: 'FontName'; /* IE9 */
-    src: url('FileName.eot');
-    src:
-        url('FileName.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-        url('FileName.woff') format('woff'), /* Chrome,Firefox */
-        url('FileName.ttf') format('truetype'), /* Chrome,Firefox,Opera,Safari,Android, iOS 4.2+ */
-        url('FileName.svg#FontName') format('svg'); /* iOS 4.1- */
+  font-family: 'FontName'; /* IE9 */
+  src: url('FileName.eot');
+  src:
+    url('FileName.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('FileName.woff') format('woff'), /* Chrome,Firefox */
+    url('FileName.ttf') format('truetype'), /* Chrome,Firefox,Opera,Safari,Android, iOS 4.2+ */
+    url('FileName.svg#FontName') format('svg'); /* iOS 4.1- */
 }
 ```
 
@@ -342,24 +591,28 @@ h3 {font-size: 22px;}
 
 ```css
 @keyframes foo {
-    50% {
-        -webkit-transform: scale(1.2);
-        -moz-transform: scale(1.2);
-        -ms-transform: scale(1.2);
-        -o-transform: scale(1.2);
-        transform: scale(1.2);
-    }
+  50% {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+  }
 }
 ```
 
 <a name="ellipsis"></a>
 ## 五、省略
 
-* 如无必要，省略0值单位。
+* 如无必要，省略 0 值单位。这些单位包括：
+  
+  ```
+    %|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px
+  ```
 * 如无必要，省略小数前面的 0。
 * 如无必要，省略 url 中的引号。
-* 省略`font-family`内中文字体名称的引号。
-* 不强制要求缩写属性，`font`，`background`，`margin` 等。
+* 省略 ```font-family``` 内中文字体名称的引号。
+* 不强制要求缩写属性，`font`，`background`，`margin`，推荐使用工具自动合并，比如 clean-css。
 * 不强制要求缩写颜色中的16进制写法。
 * 不建议省略选择器内最后一个声明末尾的分号。  
 多人协作时，如果他人新增了其他代码很可能没有注意到上一行末尾没有写分号，导致不必要的麻烦。
@@ -368,8 +621,8 @@ h3 {font-size: 22px;}
 
 ```css
 .selector {
-    display: block;
-    width: 100px
+  display: block;
+  width: 100px  
 }
 ```
 
@@ -377,50 +630,58 @@ h3 {font-size: 22px;}
 
 ```css
 .selector {
-    display: block;
-    width: 100px;
+  display: block;
+  width: 100px; 
 }
 ```
+
+<a name="shorthand"></a>
+## 六、缩写
+
+稍后更新……
+
 <a name="order"></a>
-## 六、书写顺序
+## 七、书写顺序
 
 ### 1. 不强制要求声明的书写顺序。
 
-如果团队有需求，建议使用工具来自动化排序，比如 [CSScomb](http://csscomb.com/)。  
+如果团队规范有要求，建议使用工具来自动化排序，比如 [CSScomb](http://csscomb.com/)，或者使用 @wangjeaf 开发的  [ckstyle](https://github.com/wangjeaf/ckstyle-node/)
 推荐以声明的特性作为分组，不同分组间保留一个空行，例如：
 
 ```css
 .dialog {
-    /* 定位 */
-    margin: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;    
+  /* 定位 */
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;    
 
-    /* 盒模型 */
-    width: 500px;
-    height: 300px;
-    padding: 10px 20px;
+  /* 盒模型 */
+  width: 500px;
+  height: 300px;
+  padding: 10px 20px;
 
-    /* 皮肤 */
-    background: #FFF;
-    color: #333;
-    border: 1px solid;
-    border-radius: 5px;
+  /* 皮肤 */
+  background: #FFF;
+  color: #333;
+  border: 1px solid;
+  border-radius: 5px;                      
 }
 ```
 
-### 2. 标准的属性写在最后
+### 2. 无前缀属性一定要写在最后
+
+由于 CSS 后面的属性会覆盖前面的，无前缀属性写在最后可以保证浏览器一旦支持了，则用标准的无前缀属性来渲染。
 
 不推荐的写法：
 
 ```css
 .foo {
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
 }
 ```
 
@@ -428,14 +689,14 @@ h3 {font-size: 22px;}
 
 ```css
 .foo {
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px; 
 }
 ```
 
 <a name="selector"></a>
-## 七、选择器
+## 八、选择器
 
 ### 1. 可以使用 `*` 通用选择器。
 
@@ -445,34 +706,34 @@ h3 {font-size: 22px;}
 
 ```css
 * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; 
 }
 ```
 
 ### 2. 不要在选择器末尾使用 `*` 通用选择器。
 
-CSS选择器匹配规则是从右往左，例如：
+CSS 选择器匹配规则是从右往左，例如：
 
 ```css
 .mod .foo * {
-    border-radius: 6px;
+  border-radius: 6px;
 }
 ```
 ### 3. 如果是页面唯一的元素请使用 ID 选择器。
 
 引用[为后代选择器和ID选择器而辩护](http://hax.iteye.com/blog/1850571)
 
-> 我一直以来所主张的使用id的方式，其实就是HTML5新增元素的前身。2000年时，我们没有footer元素，为了给该div中的内容赋以结构上的意义，我们这样写：div id="footer"。今天，根据人们访问我们网站所用的浏览器和设备，我们可以选择用HTML5的footer元素替代老方式。但若是我们不能使用HTML5元素，使用id也没有什么不对的。
+> 我一直以来所主张的使用 id 的方式，其实就是 HTML5 新增元素的前身。2000 年时，我们没有 footer 元素，为了给该div中的内容赋以结构上的意义，我们这样写：div id="footer"。今天，根据人们访问我们网站所用的浏览器和设备，我们可以选择用 HTML5 的 footer 元素替代老方式。但若是我们不能使用 HTML5 元素，使用 id 也没有什么不对的。
 
-但是避免在同一个选择器使用多个 ID
+但应避免使用多个 ID 选择器。
 
 不推荐的写法：
 
 ```css
 #header #search {
-    float: right;
+  float: right;
 }
 ```
 
@@ -480,12 +741,40 @@ CSS选择器匹配规则是从右往左，例如：
 
 ```css
 #search {
-    float: right;
+  float: right;
 }
 ```
 
+
+### 4. 避免重复修饰选择器
+
+不推荐的写法：
+
+```css
+div#search {
+  float: right;
+}
+
+ul.nav {
+  overflow: hidden;
+}
+```
+
+推荐的写法：
+
+```css
+#search {
+  float: right;
+}
+
+.nav {
+  overflow: hidden;
+}
+```
+
+
 <a name="other"></a>
-## 八、其他
+## 九、其他
 
 * 如果需要 CSS Hacks，需详细注明解决什么问题。
 * 尽量避免使用 IE 中的 CSS filters。
@@ -498,18 +787,18 @@ CSS选择器匹配规则是从右往左，例如：
 
 ```html
 <div class="box">
-    <p>line-height</p>
+  <p>line-height</p>
 </div>
 ```
 
 ```css
 .box {
-    line-height: 50px;
-    font-size: 20px;
+  line-height: 50px;
+  font-size: 20px;  
 }
 
 p {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 /**
@@ -521,12 +810,12 @@ p {
 
 ```css
 .box {
-    line-height: 150%;
-    font-size: 20px;
+  line-height: 150%;
+  font-size: 20px;  
 }
 
 p {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 /**
@@ -539,12 +828,12 @@ p {
 
 ```css
 .box {
-    line-height: 1.5;
-    font-size: 20px;
+  line-height: 1.5;
+  font-size: 20px;  
 }
 
 p {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 /**
@@ -556,7 +845,7 @@ p {
 ```
 
 <a name="preprocessors"></a>
-## 九、预处理工具
+## 十、预处理工具
 
 不同的 CSS 预处理工具有着不同的特性、功能以及语法。编码习惯应当根据使用的预处理工具进行扩展，
 以适应其特有的功能。推荐在使用 SCSS 时遵守以下指导。
@@ -570,24 +859,35 @@ p {
 
 ```css
 .selector {
-    @extend .other-rule;
-    @include clearfix();
-    @include box-sizing(border-box);
-    width: x-grid-unit(1);
-    // 其他声明
+  @extend .other-rule;
+  @include clearfix();
+  @include box-sizing(border-box);
+  width: x-grid-unit(1);
+  // 其他声明
 }
 ```
 
+<a name="postprocessors"></a>
+## 十一、后处理工具
+
+待更新……
+
 <a name="organization"></a>
-## 十、代码组织
+## 十二、代码组织
+
+待更新……
 
 <a name="build"></a>
-## 十一、构建部署
+## 十三、构建部署
 
-使用 grunt 部署 CSS
+待更新……
+
 
 <a name="license"></a>
 ## 许可
 
 MIT License
-Copyright (c) 2013 一丝
+
+Copyright (c) 2013-2014 一丝(@yisibl)
+
+新浪微博： http://weibo.com/jieorlin/
