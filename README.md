@@ -485,7 +485,7 @@ h3 {
 ```css
 .selector1 {
   display: block;
-  width: 100px
+  width: 100px;
 }
 .selector2 {
   padding: 10px;
@@ -498,7 +498,7 @@ h3 {
 ```css
 .selector1 {
   display: block;
-  width: 100px
+  width: 100px;
 }
 
 .selector2 {
