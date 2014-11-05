@@ -392,12 +392,17 @@ clean-css 是一个 CSS 压缩工具，为了保留 CSS 文件的版权信息等
 
 ### 2. 统一使用小写。
 
-字体名称以及特殊的 CSS 属性/值（```translateX```等）不要求强制小写。
+* 字体名称以及特殊的 CSS 属性/值（```translateX```等）不要求强制小写
+* 颜色值如果是16进制，推荐小写，更加容易辨识。
+* 如果是关键字色值，推荐使用[颜色关键字](http://dev.w3.org/csswg/css-color-3/#svg-color)，更加直观。
+
+不推荐的写法：
 
 ```css
 .Foo{
   BACKGROUND: #CCC;
   color: currentColor;
+  border-color: #F00; /* 红色 */
   transform: translateX(20px);
 }
 ```
@@ -408,9 +413,11 @@ clean-css 是一个 CSS 压缩工具，为了保留 CSS 文件的版权信息等
 .foo{
   background: #ccc;
   color: currentColor;
+  border-color: red;
   transform: translateX(20px);
 }
 ```
+
 
 ### 3. 保持空格
 
