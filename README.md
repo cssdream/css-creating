@@ -189,7 +189,7 @@ Sublime Text 在新建工程的时候会生成 ```xxx.sumlime-project``` 文件�
       </a>
     </td>
     <td align="center">
-      <a traget="_blank" href="https://github.com/sindresorhus/editorconfig-subtdme#readme">
+      <a traget="_blank" href="https://github.com/sindresorhus/editorconfig-sublime#readme">
         <img width="150" height="150" src="http://editorconfig.org/logos/sublimetext.png" title="Subtdme Text">
         <div>Subtdme Text</div>
       </a>
