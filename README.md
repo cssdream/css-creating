@@ -37,10 +37,19 @@ CSS 是一种领域语言（DSL），层叠与继承赋予了 CSS 优雅多姿�
 
 本文档规定：
 
-* 使用2个空格缩进。
-* 使用 Unix 风格换行符（LF），[更多](https://github.com/cssmagic/blog/issues/22)。
-* 删除行尾多余的空格。
-* 文件末尾增加一个空行。
+* **使用2个空格缩进。**
+* **使用 Unix 风格换行符（LF）** 
+  保证跨平台的一致性，[更多](https://github.com/cssmagic/blog/issues/22)。
+
+* **删除行尾多余的空格**  
+  因为这些空格通常是不必要的（JSHint 中会通过 ```trailing``` 来检测是否存在多余的空格）。
+
+* **文件末尾增加一个空行**  
+  没有空行在合并多个文件时可能会把上一个文件的最后一行与下一个文件的第一行合并为一行，特别是，JS 中如果没有这个空行而恰巧末尾没有写分号，整个文件可能就会报错了。
+
+  扩展阅读：   
+  * [为什么 C 语言源程序最后一行要是一个空行？](http://www.zhihu.com/question/20018991)     
+  * [Why should files end with a newline?](http://stackoverflow.com/questions/729692/why-should-files-end-with-a-newline)
 
 ### 1. 如何保证统一的缩进风格？
 
@@ -57,7 +66,8 @@ Sublime Text 在新建工程的时候会生成 ```xxx.sumlime-project``` 文件�
   "settings": {
     "tab_size": 4,
     "translate_tabs_to_spaces": true, // tab 转换为空格
-    "trim_trailing_white_space_on_save": true // 保存时文件末尾增加空行
+    "ensure_newline_at_eof_on_save": true, // 保存时文件末尾自动增加一个空行
+    "trim_trailing_white_space_on_save": true // 删除行尾多余的空格
   }
 }
 ```
