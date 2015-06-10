@@ -99,6 +99,15 @@ Sublime Text 在新建工程的时候会生成 ```xxx.sumlime-project``` 文件�
  # 为 Markdown 文件保留行尾空格
  [*.md]
  trim_trailing_whitespace = false
+
+ ＃匹配多个文件（逗号前后不能有空格）
+ [*.{css,scss,sass}]
+ indent_size = 2
+
+ # 匹配指定的文件（逗号前后不能有空格）
+ [{package.json,.travis.yml}]
+ indent_style = space
+ indent_size = 2
  ```
 
  4. 安装编辑器插件
