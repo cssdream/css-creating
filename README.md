@@ -104,7 +104,7 @@ Sublime Text 在新建工程的时候会生成 ```xxx.sumlime-project``` 文件�
  [*.{css,scss,sass}]
  indent_size = 2
 
- # 匹配指定的文件（逗号前后不能有空格）
+ # 匹配多个指定的文件（逗号前后不能有空格）
  [{package.json,.travis.yml}]
  indent_style = space
  indent_size = 2
