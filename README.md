@@ -1011,29 +1011,28 @@ p {
 随着 PostCSS 的不断完善，各种插件如雨后春笋般的涌现出来，其中不乏一些很优秀的插件。
 
 1. 面向未来的 CSS
-  * [Autoprefixer](https://github.com/postcss/autoprefixer) 根据 [caniuse](http://caniuse.com/) 的数据自动增加前缀，解放双手的利器（🌟🌟🌟 推荐👍 ）
-  * [postcss-cssnext](http://cssnext.io/) 支持大量浏览器未实现的标准特性（CSS 变量，嵌套等）（🌟🌟 推荐👍 ）
+    * [Autoprefixer](https://github.com/postcss/autoprefixer) 根据 [caniuse](http://caniuse.com/) 的数据自动增加前缀，解放双手的利器（🌟🌟🌟 推荐👍 ）
+    * [postcss-cssnext](http://cssnext.io/) 支持大量浏览器未实现的标准特性（CSS 变量，嵌套等）（🌟🌟 推荐👍 ）
 
 
 2. 格式化工具
-
-  * [stylefmt](https://github.com/morishitter/stylefmt) 支持 CSS、SCSS 等多种语法，支持 stylelint（🌟🌟🌟 推荐👍 ）
-  * [perfectionist](https://github.com/ben-eb/perfectionist) 支持一些 `stylefmt` 不支持的语法（🌟🌟 推荐）
-  * [sublime-perfectionist](https://github.com/yisibl/sublime-perfectionist)
-  * [sublime-stylefmt](https://github.com/dmnsgn/sublime-stylefmt)
+    * [stylefmt](https://github.com/morishitter/stylefmt) 支持 CSS、SCSS 等多种语法，支持 stylelint（🌟🌟🌟 推荐👍 ）
+    * [perfectionist](https://github.com/ben-eb/perfectionist) 支持一些 `stylefmt` 不支持的语法（🌟🌟 推荐）
+    * [sublime-perfectionist](https://github.com/yisibl/sublime-perfectionist)
+    * [sublime-stylefmt](https://github.com/dmnsgn/sublime-stylefmt)
 
 3. Linter 工具
-  * [stylelint](https://github.com/stylelint/stylelint)（🌟🌟🌟 推荐👍 ）
-  * [CSSLint](https://github.com/CSSLint/csslint)
-  * [scss-lint](https://github.com/brigade/scss-lint)
+    * [stylelint](https://github.com/stylelint/stylelint)（🌟🌟🌟 推荐👍 ）
+    * [CSSLint](https://github.com/CSSLint/csslint)
+    * [scss-lint](https://github.com/brigade/scss-lint)
 
 4. 压缩代码工具
-  * [cssnano](https://github.com/ben-eb/cssnano) 后起之秀，支持规则更多（🌟🌟🌟 推荐👍 ）
-  * [clean-css](https://github.com/jakubpawlowicz/clean-css) 老牌压缩工具，速度更快（🌟🌟🌟 推荐）
-  * [CSSWring](https://github.com/hail2u/node-csswring)
-  * [postcss-csso](https://github.com/lahmatiy/postcss-csso)
+    * [cssnano](https://github.com/ben-eb/cssnano) 后起之秀，支持规则更多（🌟🌟🌟 推荐👍 ）
+    * [clean-css](https://github.com/jakubpawlowicz/clean-css) 老牌压缩工具，速度更快（🌟🌟🌟 推荐）
+    * [CSSWring](https://github.com/hail2u/node-csswring)
+    * [postcss-csso](https://github.com/lahmatiy/postcss-csso)
   
-  附：[CSS 压缩工具对比](http://goalsmashers.github.io/css-minification-benchmark/)
+    附：[CSS 压缩工具对比](http://goalsmashers.github.io/css-minification-benchmark/)
 
 <a name="organization"></a>
 ## 十三、代码组织
