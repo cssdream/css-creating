@@ -12,12 +12,12 @@ CSS 是一种领域语言（DSL），层叠与继承赋予了 CSS 优雅多姿�
 
 1. [缩进与换行](#indentation)
 2. [注释](#comments)
-3. [书写格式](#format)
-4. [细节美化](#detail)
+3. [基本格式](#basic-format)
+4. [垂直对齐](#vertical-alignment)
 5. [省略](#ellipsis)
 6. [缩写](#shorthand)
 7. [书写顺序](#order)
-8. [选择器](#selector)
+8. [选择器使用规则](#selector-rule)
 9. [字体](#fonts)
 10. [其他](#other)
 11. [预处理工具](#preprocessors)
@@ -380,8 +380,8 @@ clean-css 是一个 CSS 压缩工具，为了保留 CSS 文件的版权信息等
 */
 ```
 
-<a name="format"></a>
-## 三、书写格式
+<a name="basic-format"></a>
+## 三、基本格式
 
 ### 1. CSS文件头部声明 `@charset`
 
@@ -430,22 +430,62 @@ clean-css 是一个 CSS 压缩工具，为了保留 CSS 文件的版权信息等
 
 ### 3. 保持空格
 
+留白是一种艺术，合理的留白（空格）可以更好的阅读代码
+
 * 规则集的左大括号前保留一个空格
-* 属性值前增加个空格(使用 Emmet 会自动生成这个空格)
-* 逗号后面保留一个空格。
-
-合理的空白（空格）可以更好的阅读代码，最终推荐的效果如下：
-
+* 属性值前增加个空格(使用 [Emmet](https://emmet.io/) 会自动生成这个空格)
 ```css
 .selector {
   width: 200px;
   font-size: 22px;
+}
+```
+
+* 逗号后面保留一个空格。
+```css
+.foo {
   color: rgba(0, 0, 0, .5);
   transition: color .3s, width .5s cubic-bezier(.6, 0, .2, 1);
   transform: matrix(0, 1, 1, 1, 10, 10);
 }
+
+@keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}
 ```
 
+* 属性值中的 `/` 分隔符前后保留一个空格。
+```css
+  font: 12px / 1.5 sans-serif;
+  background: center / cover;
+  grid-area: 1 / 1 / 4 / 2;
+  grid-column: 2 / 3;
+  grid-template: 100px 1fr / 50px fit-content(100px);
+```
+
+* `calc()` 函数中的 `+, -, *, /` 运算符前后保留一个空格。
+
+```css
+  width: calc(100% / 2 - 15px);
+```
+
+* Media Queries 中的 `>, <, >=, <=` 标识符前后保持一个空格。
+
+```css
+@media (width >= 500px) and (width <= 1200px) {
+  
+}
+
+@custom-media --only-medium-screen (width >= 500px) and (width <= 1200px);
+```
+
+* 其他未来 CSS 新增的语法以此类推，保留合适的空格。
 
 ### 4. 每个声明前保留一级缩进
 
@@ -533,22 +573,84 @@ h3 {
 }
 ```
 
-<a name="detail"></a>
-## 四、细节美化
+### 8. 统一使用双引号`""`
 
-### 1. 选择器内只有一个声明时可以写在一行。
-
-这样可以使得代码显得更加紧凑，注意保持空格。
+不推荐的写法：
 
 ```css
-h1 { font-size: 32px; }
+.foo:before {
+  content: '';
+}
 
-h2 { font-size: 26px; }
-
-h3 { font-size: 22px; }
+input[type='checkbox'] {
+  position: absolute;
+}
 ```
 
-### 2. 包含多个前缀的声明不强制对齐。
+推荐的写法：
+
+```css
+.foo:before {
+  content: "";
+}
+
+input[type="checkbox"] {
+  position: absolute;
+}
+```
+
+### 9. 每增加一级花括号嵌套，则增加一级缩进
+
+例如：
+
+```css
+@supports (animation: 1s foo both) {
+  @keyframes foo {
+    50% {
+      transform: scale(1.2);
+    }
+
+    80% {
+      transform: scale(0);
+    }
+  }
+}
+```
+
+<a name="vertical-alignment"></a>
+## 四、垂直对齐
+
+### 1. `grid-template-areas` 属性值保持换行，并使用空格保持每列垂直对齐。
+
+例如：
+
+```css
+.foo {
+  grid-template-areas: "header header"
+                       "nav    main"
+                       "footer ....";
+
+}
+```
+
+### 2. `grid`、`grid-template` 属性值保持换行，并使用空格保持每列垂直对齐。
+
+例如：
+
+```css
+.foo {
+  grid-template: [header-left] "header header" 30px [header-right]
+                 [main-left]   "nav    main"   1fr  [main-right]
+                 [footer-left] "nav    footer" 30px [footer-right]
+                 / 120px 1fr;
+  grid: "hd hd hd hd   hd   hd   hd   hd   hd"   minmax(100px, auto)
+        "sd sd sd main main main main main main" minmax(100px, auto)
+        "ft ft ft ft   ft   ft   ft   ft   ft"   minmax(100px, auto)
+        / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+```
+
+### 3. 包含多个前缀的声明不强制对齐。
 
 通常可以写作这样：
 
@@ -575,9 +677,9 @@ h3 { font-size: 22px; }
 ```
 
 
-### 3. 较长的属性值推荐放在多行，属性值开头保持一级缩进。
+### 4. 以逗号分隔的多属性值推荐放在多行，属性值开头保持一级缩进。
 
-比如多个` box-shadow` 和背景渐变等，这有助于提高代码的可读性，且易于生成有效的 Diff。
+比如多个`box-shadow`、`background`、@font-face 中的 `src` 等，这有助于提高代码的可读性，且易于生成有效的 Diff。
 
 ```css
 .selector {
@@ -587,7 +689,12 @@ h3 { font-size: 22px; }
     2px 0 3px 5px #ccc inset;
   background-image:
     linear-gradient(to top right, green, blue),
+    linear-gradient(130deg, pink, lightblue),
     linear-gradient(to right, blue, red);
+  background-size:
+    100px 20px,
+    30px, 100%;
+    cover;
 }
 
 @media
@@ -610,20 +717,6 @@ h3 { font-size: 22px; }
     url('FileName.woff') format('woff'), /* Chrome,Firefox */
     url('FileName.ttf') format('truetype'), /* Chrome,Firefox,Opera,Safari,Android, iOS 4.2+ */
     url('FileName.svg#FontName') format('svg'); /* iOS 4.1- */
-}
-```
-
-### 4. `@keyframes` 内的关键帧保留一级缩进。
-
-```css
-@keyframes foo {
-  50% {
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    transform: scale(1.2);
-  }
 }
 ```
 
@@ -664,9 +757,9 @@ h3 { font-size: 22px; }
 ```
 
 <a name="shorthand"></a>
-## 六、缩写
+## 六、缩写规则
 
-稍后更新……
+待更新……
 
 <a name="order"></a>
 ## 七、书写顺序
@@ -723,8 +816,8 @@ h3 { font-size: 22px; }
 }
 ```
 
-<a name="selector"></a>
-## 八、选择器
+<a name="selector-rule"></a>
+## 八、选择器使用规则
 
 ### 1. 可以使用 `*` 通用选择器。
 
@@ -749,6 +842,7 @@ CSS 选择器匹配规则是从右往左，例如：
   border-radius: 6px;
 }
 ```
+
 ### 3. 如果是页面唯一的元素请使用 ID 选择器。
 
 引用[为后代选择器和ID选择器而辩护](http://hax.iteye.com/blog/1850571)
@@ -772,7 +866,6 @@ CSS 选择器匹配规则是从右往左，例如：
   float: right;
 }
 ```
-
 
 ### 4. 避免重复修饰选择器
 
@@ -802,18 +895,34 @@ ul.nav {
 }
 ```
 
+### 5. 所有[组合选择器](https://drafts.csswg.org/selectors-3/#combinators)（`>, +, ~, >>`）前后保留一个空格（以空格表示的后代选择器除外）
+
+不推荐的写法：
+
+```css
+.foo>.bar+div~#baz {
+  color: blue;
+}
+```
+
+推荐的写法：
+
+```css
+.foo > .bar + div ~ #baz {
+  color: blue;
+}
+```
+
 <a name="fonts"></a>
 ## 九、字体
 
-
+待更新
 
 <a name="other"></a>
 ## 十、其他
 
 * 如果需要 CSS Hacks，需详细注明解决什么问题。
 * 尽量避免使用 IE 中的 CSS filters。
-* 统一使用双引号「""」,如`content: ""`。
-* 选择器中的属性值也加上双引号，如`input[type="checkbox"]`。
 * `font-weight`普通字重使用`normal`，加粗使用`bold`。大部分字体只有两个字重，所以  
 不建议使用容易混淆的数值表示方法。
 * 如无特别精确的要求，推荐使用不带单位的`line-height`，这样当前元素的行高只与自身`font-size`成比例关系，使排版更加灵活。例如`line-height:1.5`
@@ -915,6 +1024,6 @@ p {
 
 MIT License
 
-Copyright (c) 2013-2014 一丝(@yisibl)
+Copyright (c) 2013-2017 一丝(@yisibl)
 
 新浪微博： http://weibo.com/jieorlin/
