@@ -630,15 +630,15 @@ h3 { font-size: 22px; }
 <a name="ellipsis"></a>
 ## 五、省略
 
-* 如无必要，省略 0 值单位。这些单位包括：
+* 不推荐省略 0 值单位，原因如下：
+  1. CSS 规范中可以省略单位只有 `[<length-percentage>](https://drafts.csswg.org/css-values-3/#typedef-length-percentage)`，其他比如角度单位 `deg` 在 Chrome 中可以省略，
+  这是浏览器的 Bug。（可以省略的单位包括：`%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|q|in|pt|pc|px` 以及 [CSS Values 4]() 新增的：`cap|ic|lh|rlh|vi|vb`）
   
-  ```
-    %|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|in|pt|pc|px
-  ```
-* 如无必要，省略小数前面的 0。
+  2. 大部分编辑中都可以通过快捷键快速加减数值，如果省略了单位就会失去这个便捷性。
+
 * 如无必要，省略 url 中的引号。
 * 省略 ```font-family``` 内中文字体名称的引号。
-* 不强制要求缩写属性，`font`，`background`，`margin`，推荐使用工具自动合并，比如 clean-css。
+* 不强制要求缩写属性，`font`，`background`，`margin`，推荐使用工具自动合并，比如 [clean-css](https://github.com/jakubpawlowicz/clean-css)、[cssnano](https://github.com/ben-eb/cssnano)。
 * 不强制要求缩写颜色中的16进制写法。
 * 不要省略选择器内最后一个声明末尾的分号。  
 多人协作时，如果他人新增了其他代码很可能没有注意到上一行末尾没有写分号，导致 CSS 解析错误。
@@ -647,7 +647,8 @@ h3 { font-size: 22px; }
 
 ```css
 .selector {
-  display: block;
+  background: url("../foo.png");
+  transform: rotate3d(1, 1, 1, 0);
   width: 100px
 }
 ```
@@ -656,7 +657,8 @@ h3 { font-size: 22px; }
 
 ```css
 .selector {
-  display: block;
+  background: url(../foo.png);
+  transform: rotate3d(1, 1, 1, 0deg);
   width: 100px;
 }
 ```
