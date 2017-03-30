@@ -434,58 +434,82 @@ clean-css 是一个 CSS 压缩工具，为了保留 CSS 文件的版权信息等
 
 * 规则集的左大括号前保留一个空格
 * 属性值前增加个空格(使用 [Emmet](https://emmet.io/) 会自动生成这个空格)
-```css
-.selector {
-  width: 200px;
-  font-size: 22px;
-}
-```
+  ```css
+  .selector {
+    width: 200px;
+    font-size: 22px;
+  }
+  ```
 
 * 逗号后面保留一个空格。
-```css
-.foo {
-  color: rgba(0, 0, 0, .5);
-  transition: color .3s, width .5s cubic-bezier(.6, 0, .2, 1);
-  transform: matrix(0, 1, 1, 1, 10, 10);
-}
-
-@keyframes flash {
-  0%, 50%, 100% {
-    opacity: 1;
+  ```css
+  .foo {
+    color: rgba(0, 0, 0, .5);
+    transition: color .3s, width .5s cubic-bezier(.6, 0, .2, 1);
+    transform: matrix(0, 1, 1, 1, 10, 10);
   }
 
-  25%, 75% {
-    opacity: 0;
+  @keyframes flash {
+    0%, 50%, 100% {
+      opacity: 1;
+    }
+
+    25%, 75% {
+      opacity: 0;
+    }
   }
-}
-```
+  ```
 
 * 属性值中的 `/` 分隔符前后保留一个空格。
-```css
-  font: 12px / 1.5 sans-serif;
-  background: center / cover;
-  grid-area: 1 / 1 / 4 / 2;
-  grid-column: 2 / 3;
-  grid-template: 100px 1fr / 50px fit-content(100px);
-```
+  ```css
+  .foo {
+    font: 12px / 1.5 sans-serif;
+    background: center / cover;
+    grid-area: 1 / 1 / 4 / 2;
+    grid-column: 2 / 3;
+    grid-template: 100px 1fr / 50px fit-content(100px);
+  }
+  ```
 
 * `calc()` 函数中的 `+, -, *, /` 运算符前后保留一个空格。
+  
+  错误的语法
 
-```css
-.foo {
-  width: calc(100% / 2 - 15px);
-}
-```
+  ```css
+  .foo {
+    width: calc(100%/3-2*1em+2*1px)
+    margin: calc(1rem -2px) calc(1rem- 1px);
+  }
+  ```
+
+  正确的语法
+
+  ```css
+  .foo {
+    width: calc(100%/3 - 2*1em + 2*1px)
+    margin: calc(1rem - 2px) calc(1rem - 1px);
+  }
+  ```
+
+  注意：`*, /` 虽然不用加前后空格，但是为了统一，建议都加空格。
+
+  推荐的写法：
+
+  ```css
+  .foo {
+    width: calc(100% / 3 - 2 * 1em + 2 * 1px)
+    margin: calc(1rem - 2px) calc(1rem - 1px);
+  }
+  ```
 
 * Media Queries 中的 `>, <, >=, <=` 标识符前后保持一个空格。
+  ```css
+  @media (width >= 500px) and (width <= 1200px) {
+    
+  }
 
-```css
-@media (width >= 500px) and (width <= 1200px) {
-  
-}
-
-@custom-media --only-medium-screen (width >= 500px) and (width <= 1200px);
-```
+  @custom-media --only-medium-screen (width >= 500px) and (width <= 1200px);
+  ```
 
 * 其他未来 CSS 新增的语法以此类推，保留合适的空格。
 
@@ -727,7 +751,8 @@ input[type="checkbox"] {
 
 * 不推荐省略 0 值单位，原因如下：
   1. CSS 规范中可以省略单位只有 `[<length-percentage>](https://drafts.csswg.org/css-values-3/#typedef-length-percentage)`，其他比如角度单位 `deg` 在 Chrome 中可以省略，
-  这是浏览器的 Bug。（可以省略的单位包括：`%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|q|in|pt|pc|px` 以及 [CSS Values 4]() 新增的：`cap|ic|lh|rlh|vi|vb`）
+  这是浏览器的 Bug。
+  注：可以省略的单位包括：`%|em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|q|in|pt|pc|px` 以及 [CSS Values 4]() 新增的：`cap|ic|lh|rlh|vi|vb`
   
   2. 大部分编辑中都可以通过快捷键快速加减数值，如果省略了单位就会失去这个便捷性。
 
