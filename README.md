@@ -1058,6 +1058,9 @@ p {
     * [postcss-csso](https://github.com/lahmatiy/postcss-csso)
   
     附：[CSS 压缩工具对比](http://goalsmashers.github.io/css-minification-benchmark/)
+5. 删除页面未使用 CSS
+    * [uncss](https://github.com/giakki/uncss) 使用 PhantomJS 和 `document.querySelector` 动态筛除未使用的 CSS（🌟🌟🌟 推荐👍 ）
+    * [css-razor](https://github.com/tscanlin/css-razor) 仅仅静态检测 HTML 中未使用的 CSS
 
 <a name="organization"></a>
 ## 十三、代码组织
