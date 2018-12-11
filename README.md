@@ -230,8 +230,14 @@ Sublime Text 在新建工程的时候会生成 ```xxx.sumlime-project``` 文件�
     </td>
     <td align="center">
       <a traget="_blank" href="https://github.com/editorconfig/editorconfig-visualstudio#readme">
-        <img width="150" height="150" src="http://editorconfig.org/logos/visualstudio.png" title="Visual Studio">
+        <img width="150" height="150" src="https://editorconfig.org/logos/visualstudio-pro.png" title="Visual Studio">
         <div>Visual Studio</div>
+      </a>
+    </td>
+    <td align="center">
+      <a traget="_blank" href="https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig">
+        <img width="150" height="150" src="https://user-images.githubusercontent.com/2784308/49776537-566fdb80-fd37-11e8-8480-a27c0faf2b41.png" title="Visual Studio Code">
+        <div>Visual Studio Code</div>
       </a>
     </td>
     <td align="center">
