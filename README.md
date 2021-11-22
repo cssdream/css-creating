@@ -483,7 +483,7 @@ clean-css 是一个 CSS 压缩工具，为了保留 CSS 文件的版权信息等
 
   ```css
   .foo {
-    width: calc(100%/3-2*1em+2*1px)
+    width: calc(100%/3-2*1em+2*1px);
     margin: calc(1rem -2px) calc(1rem- 1px);
   }
   ```
@@ -492,7 +492,7 @@ clean-css 是一个 CSS 压缩工具，为了保留 CSS 文件的版权信息等
 
   ```css
   .foo {
-    width: calc(100%/3 - 2*1em + 2*1px)
+    width: calc(100%/3 - 2*1em + 2*1px);
     margin: calc(1rem - 2px) calc(1rem - 1px);
   }
   ```
@@ -503,7 +503,7 @@ clean-css 是一个 CSS 压缩工具，为了保留 CSS 文件的版权信息等
 
   ```css
   .foo {
-    width: calc(100% / 3 - 2 * 1em + 2 * 1px)
+    width: calc(100% / 3 - 2 * 1em + 2 * 1px);
     margin: calc(1rem - 2px) calc(1rem - 1px);
   }
   ```
